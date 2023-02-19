@@ -1,35 +1,26 @@
-package collectionframework;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Scanner;
-class UserMainCode{
-	public static String sizeOfResultHashMap(HashMap<Integer,String>hashmap)
+package filehandling;
+import java.io.File;
+public class UserMainCode {
+	static void  fileIdentier(String s) 
 	{
-		int max=0;
-		String empty="";
-		Iterator<Integer> iterator=hashmap.keySet().iterator();
-		while(iterator.hasNext())
-		{	
-			int a=iterator.next();
-			if(a>max)
-			{
-				max=a;
-				String result=hashmap.get(a);
-				empty=result;
-			}
-		}
-		return empty;
+		System.out.println("\n"+s);
 	}
 	public static void main(String[] args) {
-		Scanner input=new Scanner(System.in);
-		int number=input.nextInt();
-		HashMap<Integer,String>hashmap=new HashMap<Integer,String>();
-		for(int index=0;index<number;index++)
-		{
-			hashmap.put(input.nextInt(), input.next());
+		File file=new File("C:\\Users\\Kaviya\\Desktop\\");
+		File[] listFileFolder=file.listFiles();
+		for(File listed: listFileFolder) {
+			if(listed.isFile())
+			{
+				String fileName=listed.getName();
+				int index=fileName.lastIndexOf(".");
+				String extension=fileName.substring(index+1);
+				
+				if(extension.equals("gif")) {
+					System.out.println( "file name "+fileName);
+					UserMainCode.fileIdentier("Extension of that file "+"[ "+fileName+"]"+" is: "+"\t"+extension);	
+				}
+			}
 		}
-		System.out.println(UserMainCode.sizeOfResultHashMap(hashmap));
-		input.close();
 	}
 }
 
